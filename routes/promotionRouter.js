@@ -17,13 +17,20 @@ promotionRouter.route('/')
     .catch(err => next(err));
 })
 .post((req, res, next) => {
-    Promotion.create(req.body)
-    .then(promotion => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(promotion);
-    })
-    .catch(err => next(err));
+    Promotion.create(req.body, (err, promotion) => {
+
+        if(err) {            
+        console.log('no promotions found');
+        err => next(err);
+        }
+        else {
+            console.log("yes, there is a promotion");
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(promotion);
+        }
+    }
+    )
 })
 .put((req, res) => {
     res.statusCode = 403;
