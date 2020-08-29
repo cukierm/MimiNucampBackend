@@ -14,6 +14,7 @@ const uploadRouter = require('./routes/uploadRouter')
 
 const mongoose = require('mongoose');
 const { runInNewContext } = require('vm');
+const favoriteRouter = require('./routes/favoriteRouter');
 
 const url = config.mongoUrl;
 const connect = mongoose.connect(url, {
@@ -57,6 +58,7 @@ app.use('/promotions', promotionRouter);
 app.use('/partners', partnerRouter);
 app.use('/users', usersRouter);
 app.use('/imageUpload', uploadRouter);
+app.use('/favorites', favoriteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
